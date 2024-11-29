@@ -9,8 +9,7 @@ body {
   height: 100vh;
   background: url('./images/BackgroundImage.png') no-repeat center center;
   background-size: cover;
-  overflow: auto;
-  white-space: nowrap;
+  overflow: hidden;
   cursor: grab;
 }
 
