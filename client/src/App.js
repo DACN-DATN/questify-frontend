@@ -1,26 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Islands from "./Islands/Islands";
-import "./style.css";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import IslandsPage from './Islands/IslandsPage.js';
 
 function App() {
-  const islandsRef = useRef(null);
-
-  useEffect(() => {
-    if (islandsRef.current) {
-      islandsRef.current.focus();
-    }
-  }, []);
-
   return (
-    <div className="app-container">
-      <Header />
-      <div ref={islandsRef} tabIndex="-1">
-        <Islands />
-      </div>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/islands" />} />
+        <Route path="/islands" element={<IslandsPage />} />
+      </Routes>
+    </Router>
   );
 }
 

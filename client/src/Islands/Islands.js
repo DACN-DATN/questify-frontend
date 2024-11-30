@@ -6,8 +6,8 @@ import Island from './Island';
 const islandsData = [
   { svg: Island1Image, name: 'STACK', progress: '10/58', level: 1 },
   { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 1 },
-  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 2 },
-  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 3 },
+  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 1 },
+  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 2 },
   { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 3 },
   { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 4 },
   { svg: Island1Image, name: 'STACK', progress: '10/58', level: 4 },
