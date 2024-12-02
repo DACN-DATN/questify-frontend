@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  overflow:auto;
+}
+
+.background-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url('./images/BackgroundImage.png') no-repeat center center;
+  background-size: cover;
+  overflow: auto;
+  cursor: grab;
+}
+
+.drag-container {
+  position: absolute;
+  width: 3000px;
+  height: 100%;
+}
+
+.drag-container:active {
+  cursor: grabbing;
+}
+
+.islands-grid {
+  display: flex;
+  gap: 80px; 
+}
+
+.island-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.island {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.locked-island {
+  background-color: black;
+}
+
+.island:hover {
+  transform: scale(1.05);
+}
+
+.island-image {
+  width: 360px;
+}
+
+.play-button {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.play-button img {
+  width: auto;
+  height: 48px;
+  margin: 3px 0;
+}
+
+.locked-play-button img {
+  filter: grayscale(100%);
+}
+
+.play-button:hover img {
+  opacity: 0.8;
+}
+
+.play-button:active img {
+  opacity: 0.6;
+}
+
+.island__name {
+  font-size: 36px;
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: white;
+  margin-top: 3px 0;
+  gap: 0px;
+  box-sizing: border-box;
+  text-shadow:
+    -0.1em -0.1em 0 #000,
+    0.1em -0.1em 0 #000,
+    -0.1em 0.1em 0 #000,
+    0.1em 0.1em 0 #000;
+}
+
+.island__progress {
+  font-size: 24px;
+  color: white;
+  height: 50%;
+  font-family: 'Bangers', cursive;
+  font-weight: 400;
+  box-sizing: border-box;
+  text-shadow:
+    -0.1em -0.1em 0 #000,
+    0.1em -0.1em 0 #000,
+    -0.1em 0.1em 0 #000,
+    0.1em 0.1em 0 #000;
+  margin: 3px 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.background-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
