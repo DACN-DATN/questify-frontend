@@ -18,7 +18,7 @@ function HeaderCourseDetail() {
                     </button>
                     <div className="course-detail__info">
                         <h1 className="course-detail__title">
-                            Complete Website Responsive Design: from Figma to Webflow to Website Design
+                            Data Structures and Algorithms
                         </h1>
                         <div className="course-detail__meta">
                             <div className="course-detail__meta-item">

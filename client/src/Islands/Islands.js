@@ -4,18 +4,23 @@ import { Island1Image } from './images/images';
 import Island from './Island';
 
 const islandsData = [
-  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 1 },
-  { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 1 },
-  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 1 },
-  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 2 },
-  { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 3 },
-  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 4 },
-  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 4 },
-  { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 5 },
-  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 6 },
-  { svg: Island1Image, name: 'STACK', progress: '10/58', level: 7 },
-  { svg: Island1Image, name: 'TWO POINTERS', progress: '0/58', level: 7 },
-  { svg: Island1Image, name: 'QUEUE', progress: '0/58', level: 8 },
+  { svg: Island1Image, name: 'ARRAY & HASHING', progress: '58/58', level: 1, status: 'available' },
+  { svg: Island1Image, name: 'TWO POINTERS', progress: '58/58', level: 2, status: 'available'},
+  { svg: Island1Image, name: 'STACK', progress: '58/58', level: 2, status: 'available' },
+  { svg: Island1Image, name: 'BINARY SEARCH', progress: '58/58', level: 3, status: 'available' },
+  { svg: Island1Image, name: 'SLIDING WINDOW', progress: '58/58', level: 3, status: 'available' },
+  { svg: Island1Image, name: 'LINKED LIST', progress: '58/58', level: 3, status: 'available' },
+  { svg: Island1Image, name: 'TREES', progress: '58/58', level: 4, status: 'available' },
+  { svg: Island1Image, name: 'TRIES', progress: '15/58', level: 5, status: 'available' },
+  { svg: Island1Image, name: 'HEAP/PRIORITY QUEUE', progress: '0/58', level: 6, status: 'locked' },
+  { svg: Island1Image, name: 'GRAPHS', progress: '0/58', level: 6, status: 'locked' },
+  { svg: Island1Image, name: '1-D DP', progress: '0/58', level: 6, status: 'locked' },
+  { svg: Island1Image, name: 'INTARVALS', progress: '0/58', level: 7, status: 'locked' },
+  { svg: Island1Image, name: 'GREEDY', progress: '0/58', level: 7, status: 'locked' },
+  { svg: Island1Image, name: 'ADVANCED GRAPHS', progress: '0/58', level: 7, status: 'locked' },
+  { svg: Island1Image, name: '2-D DP', progress: '0/58', level: 7, status: 'locked' },
+  { svg: Island1Image, name: 'BIT MANIPULATION', progress: '0/58', level: 7, status: 'locked' },
+  { svg: Island1Image, name: 'MATH&GEOMETRY', progress: '0/58', level: 8, status: 'locked' },
 ];
 
 const Islands = () => {
@@ -75,7 +80,7 @@ const Islands = () => {
                 svg={island.svg}
                 name={island.name}
                 progress={island.progress}
-                level={island.level}
+                status={island.status}
               />
             ))}
           </div>
