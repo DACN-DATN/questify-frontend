@@ -1,3 +1,12 @@
+
+# FE
+step to run:
+1. Config local env. (ref: https://scrapbox.io/dacn/FE_Code_problem)
+1. locate in the folder /FE
+2. run command:
+    - $npm i
+    - $npm run dev
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +77,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
