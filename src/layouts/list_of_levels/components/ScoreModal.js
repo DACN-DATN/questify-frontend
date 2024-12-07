@@ -1,4 +1,3 @@
-// src/components/ScoreModal.js
 import React, { useEffect } from 'react';
 
 function ScoreModal({ isScoreModalOpen, onClose, players }) {
@@ -15,35 +14,52 @@ function ScoreModal({ isScoreModalOpen, onClose, players }) {
     };
   }, []);
 
-  return (
-    isScoreModalOpen && (
-      <div
-        className="score-modal absolute p-4 bg-white rounded-lg border-4 border-[#FF6347] shadow-lg w-60"
-        style={{
-          zIndex: 10,
-        }}
-      >
-        <div className="score-modal-content">
-          <h2 className="font-bold text-xl text-center">Top Players</h2>
-          <ul className="mt-2">
-            {players.map((player, index) => (
-              <li key={index} className="flex justify-between">
-                <span>{player.name}</span>
-                <span>{player.score}</span>
-              </li>
-            ))}
-          </ul>
+  if (!isScoreModalOpen) return null; // If modal is not open, render nothing.
 
-          {/* Close Modal Button */}
-          <button
-            onClick={onClose}
-            className="close-modal-btn mt-4 w-full py-2 bg-gray-300 rounded text-center"
-          >
-            Close
-          </button>
+  return (
+    <div
+      className="score-modal fixed inset-0 flex justify-center items-center z-10"
+      style={{
+        zIndex: 10,
+      }}
+    >
+      <div className="score-modal-content bg-orange-200 rounded-lg border-4 border-stone-600 shadow-lg w-96 p-6 relative">
+        {/* Close Modal Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-red-500 text-2xl"
+        >
+          &times; {/* X icon */}
+        </button>
+
+        <h2 className="font-bold text-2xl text-center mb-4">Top Players</h2>
+
+        {/* Table */}
+        <div className="mt-4 overflow-x-auto max-h-72"
+          style={{
+            scrollbarWidth: 'none', // For Firefox
+            msOverflowStyle: 'none', // For Internet Explorer 10+
+          }}
+        >
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="py-2 px-4 text-left border border-gray-500">Name</th>
+                <th className="py-2 px-4 text-left border border-gray-500">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {players.map((player, index) => (
+                <tr key={index}>
+                  <td className="py-2 px-4 border-b border-r border-l border-gray-500">{player.name}</td>
+                  <td className="py-2 px-4 border-b border-r border-gray-500">{player.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    )
+    </div>
   );
 }
 

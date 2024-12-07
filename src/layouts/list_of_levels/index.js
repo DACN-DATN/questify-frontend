@@ -5,7 +5,7 @@ import bgImage from '../../assets/images/list_of_levels_bg.png';
 
 function Levels(){  
     const getLineColor = (progress1, progress2) => {
-        return progress1 === 'passed' && progress2 === 'passed' ? 'green' : 'white';
+        return (progress1 === 'passed' && (progress2 === 'passed' || progress2 === 'current')) ? 'green' : 'white';
     };
 
     return (
@@ -19,10 +19,10 @@ function Levels(){
                 {levelsData.slice(0, -1).map((level, index) => {
                     const nextLevel = levelsData[index + 1];
                     const lineColor = getLineColor(level.progress, nextLevel.progress);
-                    const lineStartX = (level.position.x / 100) * window.innerWidth + 15;
-                    const lineStartY = (level.position.y / 100) * window.innerHeight + 15;
-                    const lineEndX = (nextLevel.position.x / 100) * window.innerWidth + 15;
-                    const lineEndY = (nextLevel.position.y / 100) * window.innerHeight + 15;
+                    const lineStartX = (level.position.x / 100) * window.innerWidth + 12;
+                    const lineStartY = (level.position.y / 100) * window.innerHeight + 12;
+                    const lineEndX = (nextLevel.position.x / 100) * window.innerWidth + 12;
+                    const lineEndY = (nextLevel.position.y / 100) * window.innerHeight + 12;
 
 
                     return (
@@ -33,7 +33,7 @@ function Levels(){
                             x2={lineEndX}
                             y2={lineEndY}
                             stroke={lineColor}
-                            strokeWidth="2"
+                            strokeWidth="4"
                             strokeDasharray="5,5" // Makes the line dashed
                         />
                 );

@@ -1,4 +1,3 @@
-// src/components/LevelModal.js
 import React, { useEffect } from 'react';
 
 function LevelModal({ isModalOpen, modalPosition, modalContent, onClose, renderButtons }) {
@@ -18,7 +17,7 @@ function LevelModal({ isModalOpen, modalPosition, modalContent, onClose, renderB
   return (
     isModalOpen && (
       <div
-        className="modal absolute p-4 bg-white rounded-lg border-4 border-[#FF6347] shadow-lg w-60"
+        className="modal absolute p-4 bg-orange-200 rounded-lg border-4 border-stone-600 shadow-lg w-60"
         style={{
           left: `${modalPosition.left}px`,
           top: `${modalPosition.top}px`,
