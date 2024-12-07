@@ -1,0 +1,1 @@
+- Latest version of typescript is 5.0.2 (code problem) but I have to downgrade to 4.9.5 to be compatible with react-script (list of islands, header, footer) [htran.icon]
