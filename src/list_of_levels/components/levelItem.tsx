@@ -1,5 +1,6 @@
 // src/components/LevelItem.js
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import PlayButton2 from '../images/PlayButton2.svg';
 import PlayButton1 from '../images/PlayButton1.svg';
 import ScoreButton from '../images/ScoreButton.svg';
@@ -9,10 +10,22 @@ import BronzeChestIcon from '../images/bronze-chest.png';
 import LevelModal from './LevelModal';
 import ScoreModal from './ScoreModal';
 
-function LevelItem({ index, name, description, position, progress }) {
+interface LevelItemProps {
+  index: number;
+  name: string;
+  description: string;
+  position: { x: number; y: number };
+  progress: 'passed' | 'current' | 'not passed';
+}
+
+const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, position, progress }) => {
   const [isLevelModalOpen, setIsLevelModalOpen] = useState(false);
   const [isScoreModalOpen, setIsScoreModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState({});
+  const [modalContent, setModalContent] = useState<{
+    name: string;
+    description: string;
+    progress: 'passed' | 'current' | 'not passed';
+  }>({ name: '', description: '', progress: 'not passed' });
   const [corner, setCorner] = useState('bottom-left');
   const [players, setPlayers] = useState([
     { name: 'Player 1', score: 100 },
@@ -37,9 +50,9 @@ function LevelItem({ index, name, description, position, progress }) {
     { name: 'Player 20', score: 5 },
   ]);
 
-  const nodeRef = useRef(null);
-  const levelModalRef = useRef(null); 
-  const scoreModalRef = useRef(null); 
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const levelModalRef = useRef<HTMLDivElement>(null);
+  const scoreModalRef = useRef<HTMLDivElement>(null);
 
   const handleNodeClick = () => {
     setModalContent({ name, description, progress });
@@ -47,9 +60,8 @@ function LevelItem({ index, name, description, position, progress }) {
     setIsLevelModalOpen(true);
   };
 
-
-  const determineCorner = (nodePosition) => {
-    return 'top-left'; 
+  const determineCorner = (nodePosition: { x: number; y: number }) => {
+    return 'top-left';
   };
 
   const handleLevelModalClose = () => {
@@ -62,7 +74,7 @@ function LevelItem({ index, name, description, position, progress }) {
 
   const getModalPosition = () => {
     if (nodeRef.current) {
-      const nodeRect = nodeRef.current.getBoundingClientRect(); 
+      const nodeRect = nodeRef.current.getBoundingClientRect();
 
       let offsetX = 0;
       let offsetY = 0;
@@ -70,18 +82,18 @@ function LevelItem({ index, name, description, position, progress }) {
       switch (corner) {
         case 'bottom-right':
           offsetX = nodeRect.width;
-          offsetY = nodeRect.height; 
+          offsetY = nodeRect.height;
           break;
         case 'top-right':
-          offsetX = nodeRect.width; 
-          offsetY = -nodeRect.height; 
+          offsetX = nodeRect.width;
+          offsetY = -nodeRect.height;
           break;
         case 'bottom-left':
           offsetX = -nodeRect.width;
-          offsetY = nodeRect.height; 
+          offsetY = nodeRect.height;
           break;
         case 'top-left':
-          offsetX = -nodeRect.width; 
+          offsetX = -nodeRect.width;
           offsetY = -nodeRect.height;
           break;
         default:
@@ -89,21 +101,21 @@ function LevelItem({ index, name, description, position, progress }) {
       }
 
       return {
-        left: nodeRect.left + offsetX + window.scrollX, 
+        left: nodeRect.left + offsetX + window.scrollX,
         top: nodeRect.top + offsetY + window.scrollY,
       };
     }
-    return { left: 0, top: 0 }; 
+    return { left: 0, top: 0 };
   };
 
-  const handleClickOutside = (event) => {
-    if (scoreModalRef.current && !scoreModalRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (scoreModalRef.current && !scoreModalRef.current.contains(event.target as Node)) {
       setIsScoreModalOpen(false); // Close ScoreModal when clicked outside
     }
   };
 
-  const handleLevelModalClickOutside = (event) => {
-    if (levelModalRef.current && !levelModalRef.current.contains(event.target)) {
+  const handleLevelModalClickOutside = (event: MouseEvent) => {
+    if (levelModalRef.current && !levelModalRef.current.contains(event.target as Node)) {
       setIsLevelModalOpen(false); // Close LevelModal when clicked outside
     }
   };
@@ -139,17 +151,20 @@ function LevelItem({ index, name, description, position, progress }) {
       case 'current':
         return (
           <button className="play-button flex items-center gap-2">
-            <img src={PlayButton1} alt="Play Button" />
+            <Image src={PlayButton1} alt="Play Button" width={24} height={24} />
           </button>
         );
       case 'passed':
         return (
           <>
-            <button className="score-button flex items-center gap-2" onClick={() => setIsScoreModalOpen(true)}>
-              <img src={ScoreButton} alt="Score Button" />
+            <button
+              className="score-button flex items-center gap-2"
+              onClick={() => setIsScoreModalOpen(true)}
+            >
+              <Image src={ScoreButton} alt="Score Button" width={24} height={24} />
             </button>
             <button className="play-button flex items-center gap-2">
-              <img src={PlayButton2} alt="Play Button" />
+              <Image src={PlayButton2} alt="Play Button" width={24} height={24} />
             </button>
           </>
         );
@@ -166,7 +181,7 @@ function LevelItem({ index, name, description, position, progress }) {
             className="w-6 h-6 rounded-full bg-red-500 border-2 border-yellow-500 flex justify-center items-center"
             title="Passed"
           >
-            <img src={PassedIcon} className="w-6 h-6" />
+            <Image src={PassedIcon} className="w-6 h-6" alt="Passed Icon" width={24} height={24} />
           </div>
         );
       case 'current':
@@ -175,10 +190,12 @@ function LevelItem({ index, name, description, position, progress }) {
             className="w-6 h-6 rounded-full bg-yellow-300 border-2 border-green-700 flex justify-center items-center relative"
             title="Current"
           >
-            <img 
-              src={CurrentIcon} 
-              alt="Current" 
+            <Image
+              src={CurrentIcon}
+              alt="Current"
               className="absolute w-12 h-15" // Adjust size of the flag
+              width={48}
+              height={60}
               style={{
                 bottom: 8, // Align the root of the flag (the bottom) to the center of the circle
               }}
@@ -191,10 +208,12 @@ function LevelItem({ index, name, description, position, progress }) {
             className="w-6 h-6 rounded-full bg-gray-300 border-2 border-gray-500 flex justify-center items-center"
             title="Not Passed"
           >
-            <img 
-              src={BronzeChestIcon} 
-              alt="Not Passed" 
-              className="w-4 h-4" 
+            <Image
+              src={BronzeChestIcon}
+              alt="Not Passed"
+              className="w-4 h-4"
+              width={16}
+              height={16}
             />
           </div>
         );
@@ -222,12 +241,11 @@ function LevelItem({ index, name, description, position, progress }) {
           height: '30px',
         }}
       >
-        {getNodeIcon()} 
+        {getNodeIcon()}
       </div>
-      
+
       {/* Level Description Modal */}
       <LevelModal
-        ref={levelModalRef}
         isModalOpen={isLevelModalOpen}
         modalPosition={getModalPosition()}
         modalContent={modalContent}
@@ -244,6 +262,6 @@ function LevelItem({ index, name, description, position, progress }) {
       />
     </div>
   );
-}
+};
 
 export default LevelItem;

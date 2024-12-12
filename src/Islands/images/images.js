@@ -3,9 +3,4 @@ import Island2Image from './Island_2.svg';
 import BackgroundImage from './BackgroundImage.png';
 import PlayButtonImage from './PlayButton.svg';
 
-export {
-    Island1Image,
-    Island2Image,
-    BackgroundImage,
-    PlayButtonImage,
-};
+export { Island1Image, Island2Image, BackgroundImage, PlayButtonImage };

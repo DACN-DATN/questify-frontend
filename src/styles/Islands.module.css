@@ -1,34 +1,29 @@
-body {
-  margin: 0;
-  overflow:auto;
-}
-
-.background-container {
+.background__container {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: url('./images/BackgroundImage.png') no-repeat center center;
+  background: url('../Islands/images/BackgroundImage.png') no-repeat center center;
   background-size: cover;
   overflow: auto;
   cursor: grab;
 }
 
-.drag-container {
+.drag__container {
   position: absolute;
   width: 3000px;
   height: 100%;
 }
 
-.drag-container:active {
+.drag__container:active {
   cursor: grabbing;
 }
 
-.islands-grid {
+.islands__grid {
   display: flex;
-  gap: 80px; 
+  gap: 80px;
 }
 
-.island-column {
+.island__column {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -45,9 +40,10 @@ body {
   justify-content: center;
   margin-bottom: 20px;
   transition: transform 0.3s ease;
+  width: 400px;
 }
 
-.locked-island {
+.locked__island {
   background-color: black;
 }
 
@@ -55,13 +51,13 @@ body {
   transform: scale(1.05);
 }
 
-.island-image {
+.island__image {
   width: 360px;
 }
 
-.play-button {
+.play__button {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: none;
@@ -70,21 +66,20 @@ body {
   padding: 0;
 }
 
-.play-button img {
-  width: auto;
-  height: 48px;
-  margin: 3px 0;
+.play__button__image {
+  display: block;
+  margin: 0 auto;
 }
 
-.locked-play-button img {
+.locked__play__button img {
   filter: grayscale(100%);
 }
 
-.play-button:hover img {
+.play__button:hover img {
   opacity: 0.8;
 }
 
-.play-button:active img {
+.play__button:active img {
   opacity: 0.6;
 }
 
@@ -120,11 +115,7 @@ body {
   margin: 3px 0;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-.background-container {
+.background__container {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
