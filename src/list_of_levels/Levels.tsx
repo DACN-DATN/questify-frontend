@@ -71,6 +71,7 @@ const Levels: React.FC = () => {
         </svg>
         {levelsData.map((level) => (
           <LevelItem
+            key={level.id}
             index={level.id}
             name={level.name}
             description={level.description}

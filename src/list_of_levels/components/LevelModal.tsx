@@ -32,7 +32,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
   }, [handleClickOutside]);
 
   return (
-    isModalOpen && (
+    isModalOpen ? (
       <div
         className="modal absolute p-4 bg-orange-200 rounded-lg border-4 border-stone-600 shadow-lg w-60"
         style={{
@@ -50,7 +50,7 @@ const LevelModal: React.FC<LevelModalProps> = ({
           <div className="buttons-container mt-4 flex justify-center gap-4">{renderButtons()}</div>
         </div>
       </div>
-    )
+    ) : null
   );
 };
 
