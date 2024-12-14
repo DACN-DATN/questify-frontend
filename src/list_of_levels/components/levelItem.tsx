@@ -146,7 +146,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'current':
         return (
           <button className="play-button flex items-center gap-2">
-            <Image src={PlayButton1} alt="Play Button" width={24} height={24} />
+            <Image src={PlayButton1} alt="Play Button" width={150} height={100} />
           </button>
         );
       case 'passed':
@@ -156,10 +156,10 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
               className="score-button flex items-center gap-2"
               onClick={() => setIsScoreModalOpen(true)}
             >
-              <Image src={ScoreButton} alt="Score Button" width={24} height={24} />
+              <Image src={ScoreButton} alt="Score Button" width={200} height={100} />
             </button>
             <button className="play-button flex items-center gap-2">
-              <Image src={PlayButton2} alt="Play Button" width={24} height={24} />
+              <Image src={PlayButton2} alt="Play Button" width={200} height={100} />
             </button>
           </>
         );
