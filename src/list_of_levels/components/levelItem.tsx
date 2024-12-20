@@ -1,6 +1,7 @@
 // src/components/LevelItem.js
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import PlayButton2 from '../images/PlayButton2.svg';
 import PlayButton1 from '../images/PlayButton1.svg';
 import ScoreButton from '../images/ScoreButton.svg';
@@ -10,6 +11,7 @@ import BronzeChestIcon from '../images/bronze-chest.png';
 import LevelModal from './LevelModal';
 import ScoreModal from './ScoreModal';
 import { players } from '../data/playerData';
+
 
 interface LevelItemProps {
   index: number;
@@ -33,6 +35,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelModalRef = useRef<HTMLDivElement>(null);
   const scoreModalRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleNodeClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setModalContent({ name, description, progress });
@@ -138,6 +141,10 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     };
   }, [isLevelModalOpen]);
 
+  const handlePlayClick = () => {
+    router.push('/problems/two-sum');
+  };
+
   // render the button for level description based on the progress
   const renderButtons = () => {
     switch (progress) {
@@ -145,7 +152,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
         return null; // No buttons for 'not passed' levels
       case 'current':
         return (
-          <button className="play-button flex items-center gap-2">
+          <button className="play-button flex items-center gap-2" onClick={handlePlayClick}>
             <Image src={PlayButton1} alt="Play Button" width={150} height={100} />
           </button>
         );
@@ -158,7 +165,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
             >
               <Image src={ScoreButton} alt="Score Button" width={200} height={100} />
             </button>
-            <button className="play-button flex items-center gap-2">
+            <button className="play-button flex items-center gap-2" onClick={handlePlayClick}>
               <Image src={PlayButton2} alt="Play Button" width={200} height={100} />
             </button>
           </>
