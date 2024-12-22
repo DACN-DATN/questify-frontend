@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import style from '@/styles/Islands.module.css';
-import { PlayButtonImage } from './images/images';
+import { PlayButtonImage } from '../assets/images/images';
 
 interface IslandProps {
   svg: string;

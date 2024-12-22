@@ -8,7 +8,7 @@ import {
   linkedinIcon,
   twitterIcon,
   youtubeIcon,
-} from '@/icons/icons';
+} from '@/assets/icons/icons';
 import style from '@/styles/Footer.module.css';
 
 const Footer: React.FC = () => {

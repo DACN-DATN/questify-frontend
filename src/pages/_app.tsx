@@ -22,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossOrigin="anonymous"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
       </Head>
       <ToastContainer />
       <Component {...pageProps} />

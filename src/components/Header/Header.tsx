@@ -12,7 +12,7 @@ import {
   sectionsIcon,
   lecturesIcon,
   timeIcon,
-} from '@/icons/icons';
+} from '@/assets/icons/icons';
 import style from '@/styles/Header.module.css';
 
 const HeaderNavbar: React.FC = () => {
