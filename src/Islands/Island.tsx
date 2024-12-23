@@ -25,6 +25,7 @@ const Island: React.FC<IslandProps> = ({ svg, name, progress, status }) => {
       <button
         className={`${style.play__button} ${status === 'locked' ? style.locked__play__button : ''}`}
         onClick={handlePlayButtonClick}
+        disabled={status === 'locked'}
       >
         <div className={style.island__name}>{name}</div>
         <div className={style.island__progress}>{progress}</div>
