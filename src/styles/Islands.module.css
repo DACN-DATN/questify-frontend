@@ -2,7 +2,7 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  background: url('../Islands/images/BackgroundImage.png') no-repeat center center;
+  background: url('../assets/images/BackgroundImage.png') no-repeat center center;
   background-size: cover;
   overflow: auto;
   cursor: grab;

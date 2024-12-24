@@ -12,7 +12,7 @@ import {
   sectionsIcon,
   lecturesIcon,
   timeIcon,
-} from '@/icons/icons';
+} from '@/assets/icons/icons';
 import style from '@/styles/Header.module.css';
 
 const HeaderNavbar: React.FC = () => {
@@ -48,9 +48,6 @@ const HeaderNavbar: React.FC = () => {
           </Link>
         </div>
         <div className={`flex ${style.search__container}`}>
-          <select className={style.navbar__browseSelect}>
-            <option>Browse</option>
-          </select>
           <div className={style.navbar__searchContainer}>
             <Image src={searchIcon} alt="Search" />
             <input

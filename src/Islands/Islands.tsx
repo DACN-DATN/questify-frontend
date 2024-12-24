@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Island from './Island';
 import style from '@/styles/Islands.module.css';
-import Island1Image from './images/Island_1.svg';
+import Island1Image from '@/assets/images/Island_1.svg';
 
 interface IslandData {
   svg: string;
