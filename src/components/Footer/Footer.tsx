@@ -8,7 +8,7 @@ import {
   linkedinIcon,
   twitterIcon,
   youtubeIcon,
-} from '@/icons/icons';
+} from '@/assets/icons/icons';
 import style from '@/styles/Footer.module.css';
 
 const Footer: React.FC = () => {
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           </Link>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 mb-5">
           <Link href="/" className="text-zinc-400 hover:text-white">
             <Image src={facebookIcon} alt="Facebook Logo" width={46} height={46} className="mx-1" />
           </Link>

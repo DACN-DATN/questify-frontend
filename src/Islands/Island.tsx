@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import style from '@/styles/Islands.module.css';
-import { PlayButtonImage } from './images/images';
+import { PlayButtonImage } from '../assets/images/images';
 
 interface IslandProps {
   svg: string;
@@ -25,6 +25,7 @@ const Island: React.FC<IslandProps> = ({ svg, name, progress, status }) => {
       <button
         className={`${style.play__button} ${status === 'locked' ? style.locked__play__button : ''}`}
         onClick={handlePlayButtonClick}
+        disabled={status === 'locked'}
       >
         <div className={style.island__name}>{name}</div>
         <div className={style.island__progress}>{progress}</div>

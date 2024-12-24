@@ -3,7 +3,11 @@ import React, { useEffect, useCallback } from 'react';
 interface LevelModalProps {
   isModalOpen: boolean;
   modalPosition: { left: number; top: number };
-  modalContent: { name: string; description: string };
+  modalContent: {
+    name: string;
+    description: string;
+    progress: 'passed' | 'current' | 'not passed';
+  };
   onClose: () => void;
   renderButtons: () => React.ReactNode;
 }
