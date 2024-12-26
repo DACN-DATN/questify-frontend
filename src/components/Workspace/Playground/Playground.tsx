@@ -5,6 +5,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import EditorFooter from './EditorFooter';
+import RewardModal from '@/components/Reward Modal/RewardModal';
 import { Problem } from '@/utils/types/problem';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
@@ -29,6 +30,7 @@ export interface ISettings {
 const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved }) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
   let [userCode, setUserCode] = useState<string>(problem.starterCode);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
 
   const [fontSize, setFontSize] = useLocalStorage('lcc-fontSize', '16px');
 
@@ -66,6 +68,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
             theme: 'dark',
           });
           setSuccess(true);
+          setIsRewardModalOpen(true);
           setTimeout(() => {
             setSuccess(false);
           }, 4000);
@@ -111,6 +114,10 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
   const onChange = (value: string) => {
     setUserCode(value);
     localStorage.setItem(`code-${pid}`, JSON.stringify(value));
+  };
+
+  const handleCloseRewardModal = () => {
+    setIsRewardModalOpen(false);
   };
 
   return (
@@ -169,6 +176,18 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
         </div>
       </Split>
       <EditorFooter handleSubmit={handleSubmit} />
+      {isRewardModalOpen && (
+        <RewardModal
+          xpGained={125}
+          gemsGained={20}
+          level={15}
+          rewards={[
+            { name: 'XP', amount: 125, icon: 'xp' },
+            { name: 'Gems', amount: 20, icon: 'gems' },
+          ]}
+          onClose={handleCloseRewardModal}
+        />
+      )}
     </div>
   );
 };

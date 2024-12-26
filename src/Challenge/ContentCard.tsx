@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import YouTube from 'react-youtube';
+import RewardModal from '../components/Reward Modal/RewardModal';
 
 interface ContentCardProps {
   type: string;
@@ -19,6 +20,7 @@ interface ContentCardProps {
 const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, totalPages }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [result, setResult] = useState<boolean | null>(null);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
 
   const handleOptionChange = (option: string) => {
     setSelectedAnswer(option);
@@ -26,7 +28,15 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setResult(selectedAnswer === content.answer);
+    const isCorrect = selectedAnswer === content.answer;
+    setResult(isCorrect);
+    if (isCorrect) {
+      setIsRewardModalOpen(true);
+    }
+  };
+
+  const handleCloseRewardModal = () => {
+    setIsRewardModalOpen(false);
   };
 
   return (
@@ -99,6 +109,18 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
           </div>
         )}
       </div>
+      {isRewardModalOpen && (
+        <RewardModal
+          xpGained={100}
+          gemsGained={50}
+          level={15}
+          rewards={[
+            { name: 'XP', amount: 100, icon: 'xp' },
+            { name: 'Gems', amount: 50, icon: 'gems' },
+          ]}
+          onClose={handleCloseRewardModal}
+        />
+      )}
     </div>
   );
 };

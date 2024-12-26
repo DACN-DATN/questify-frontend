@@ -142,7 +142,14 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
   }, [isLevelModalOpen]);
 
   const handlePlayClick = () => {
-    router.push('/problems/two-sum');
+    switch (progress) {
+      case 'current':
+        router.push('/problems/two-sum');
+      case 'passed':
+        router.push('/challenges');
+      default:
+        return null;
+    }
   };
 
   // render the button for level description based on the progress
