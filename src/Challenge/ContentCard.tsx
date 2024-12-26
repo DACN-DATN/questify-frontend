@@ -113,7 +113,8 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
         <RewardModal
           xpGained={100}
           gemsGained={50}
-          level={15}
+          level={2}
+          progress={15}
           rewards={[
             { name: 'XP', amount: 100, icon: 'xp' },
             { name: 'Gems', amount: 50, icon: 'gems' },

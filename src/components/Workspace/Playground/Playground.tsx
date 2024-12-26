@@ -180,7 +180,8 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
         <RewardModal
           xpGained={125}
           gemsGained={20}
-          level={15}
+          level={3}
+          progress={18}
           rewards={[
             { name: 'XP', amount: 125, icon: 'xp' },
             { name: 'Gems', amount: 20, icon: 'gems' },

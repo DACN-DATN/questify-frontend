@@ -16,11 +16,12 @@ interface RewardModalProps {
   xpGained: number;
   gemsGained: number;
   level: number;
+  progress: number;
   rewards: Reward[];
   onClose: () => void;
 }
 
-const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, rewards, onClose }) => {
+const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, progress, rewards, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -59,7 +60,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, 
           <h1 className="text-3xl font-bold text-green-600">CONGRATULATIONS</h1>
         </div>
         <div className="modal-content text-center mb-4">
-          <p className="text-lg mb-4">You completed Level 2</p>
+          <p className="text-lg mb-4">You completed Level {level}</p>
           <div className="rewards grid grid-cols-2 gap-4 mb-4">
             {rewards.map((reward, index) => (
               <div
@@ -82,7 +83,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, 
           </div>
           <div className="total-rewards">
             <div className="xp-gained mb-4">
-              <span className="block text-lg font-semibold">Progress - Level {level}</span>
+              <span className="block text-lg font-semibold">Progress - Level {progress}</span>
               <div className="progress-bar bg-gray-800 border border-3 border-black rounded-full h-4 mt-2">
                 <div
                   className="progress bg-green-500 h-4 rounded-full"

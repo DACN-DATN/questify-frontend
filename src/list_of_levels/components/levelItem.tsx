@@ -144,7 +144,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
   const handlePlayClick = () => {
     switch (progress) {
       case 'current':
-        router.push('/problems/two-sum');
+        router.push('problems/jump-game');
       case 'passed':
         router.push('/challenges');
       default:
