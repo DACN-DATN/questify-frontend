@@ -62,11 +62,11 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
       if (typeof handler === 'function') {
         const success = handler(cb);
         if (success) {
-          toast.success('Congrats! All tests passed!', {
-            position: 'top-center',
-            autoClose: 3000,
-            theme: 'dark',
-          });
+          // toast.success('Congrats! All tests passed!', {
+          //   position: 'top-center',
+          //   autoClose: 3000,
+          //   theme: 'dark',
+          // });
           setSuccess(true);
           setIsRewardModalOpen(true);
           setTimeout(() => {
@@ -178,13 +178,25 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
       <EditorFooter handleSubmit={handleSubmit} />
       {isRewardModalOpen && (
         <RewardModal
-          xpGained={125}
-          gemsGained={20}
           level={3}
-          progress={18}
-          rewards={[
-            { name: 'XP', amount: 125, icon: 'xp' },
-            { name: 'Gems', amount: 20, icon: 'gems' },
+          progress={50}
+          achievements={[
+            {
+              id: 'level-complete',
+              description: 'Level Complete!',
+              rewards: [
+                { type: 'xp', amount: 150, icon: 'xp' },
+                { type: 'gems', amount: 70, icon: 'gems' }
+              ]
+            },
+            {
+              id: 'quiz-bonus',
+              description: 'Bonus!',
+              rewards: [
+                { type: 'xp', amount: 50, icon: 'xp' },
+                { type: 'gems', amount: 25, icon: 'gems' }
+              ]
+            }
           ]}
           onClose={handleCloseRewardModal}
         />

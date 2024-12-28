@@ -1,27 +1,38 @@
 import React, { useRef, useEffect } from "react";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import styles from './rewardModal.module.css';
 import LeaderboardsIcon from './images/view_leaderboard_button.png';
 import ContinueIcon from './images/continue_button.png';
 import XPBarIcon from './images/reward_icon_xp.png';
 import GemsIcon from './images/reward_icon_gems.png';
+import RewardPlateWide from './images/reward_plate_wide.png';
+import VictoryHero from './images/victory_hero.png';
+import VictoryWord from './images/victory_word.png';
+import RewardPlate from './images/reward_plate_wide.png';
+import VictoryModalShelf from './images/victory_modal_shelf.png';
 
 interface Reward {
-  name: string;
-  amount: number;
+  type: 'xp' | 'gems' | 'item';
+  amount?: number;
+  itemName?: string;
   icon: string;
 }
 
+interface AchievementPanel {
+  id: string;
+  description: string;
+  rewards: Reward[];
+}
+
 interface RewardModalProps {
-  xpGained: number;
-  gemsGained: number;
   level: number;
   progress: number;
-  rewards: Reward[];
+  achievements: AchievementPanel[];
   onClose: () => void;
 }
 
-const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, progress, rewards, onClose }) => {
+const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -53,62 +64,115 @@ const RewardModal: React.FC<RewardModalProps> = ({ xpGained, gemsGained, level, 
     }
   };
 
+  const calculateTotals = () => {
+    let totalXP = 0;
+    let totalGems = 0;
+
+    achievements.forEach(achievement => {
+      achievement.rewards.forEach(reward => {
+        if (reward.type === 'xp') totalXP += reward.amount || 0;
+        if (reward.type === 'gems') totalGems += reward.amount || 0;
+      });
+    });
+
+    return { totalXP, totalGems };
+  };
+
+  const { totalXP, totalGems } = calculateTotals();
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div ref={modalRef} className="bg-orange-200 rounded-lg border-4 border-stone-600 shadow-lg p-6 w-11/12 max-w-lg">
-        <div className="text-center mb-4">
-          <h1 className="text-3xl font-bold text-green-600">CONGRATULATIONS</h1>
-        </div>
-        <div className="modal-content text-center mb-4">
-          <p className="text-lg mb-4">You completed Level {level}</p>
-          <div className="rewards grid grid-cols-2 gap-4 mb-4">
-            {rewards.map((reward, index) => (
-              <div
-                key={index}
-                className="reward-item flex flex-col items-center relative bg-amber-100 border-4 border-yellow-500 rounded-md p-4"
-              >
-                <div className="icon-container w-16 h-16 flex items-center justify-center">
+    <div id="reward-modal" className={styles.modal}>
+      <div className={styles.modalDialog}>
+        <div ref={modalRef} className={styles.backgroundWrapper}>
+          <div className={styles.modalContent}>
+            {/* <div className={styles.modalHeader}>
+              <div className={styles.victoryHeader}>
+                <div className={styles.victoryTitle}>
                   <Image
-                    src={getIcon(reward.icon)}
-                    alt={reward.name}
-                    width={64}
-                    height={64}
+                    src={VictoryWord}
+                    alt="Victory"
+                    draggable={false}
+                    width={378}
+                    height={60}
                   />
                 </div>
-                <div className="absolute bottom-0 bg-red-500 border-2 border-red-900 px-4 py-1 rounded-full translate-y-1/2">
-                  <span className="text-white font-bold">+{reward.amount}</span>
+              </div>
+            </div> */}
+            <div className={styles.modalBody}>
+              {achievements.map((achievement) => (
+                <div key={achievement.id} className={styles.achievementPanel}>
+                  <div className={styles.achievementDescription}>
+                    {achievement.description}
+                  </div>
+                  <div className={styles.achievementRewards}>
+                    {achievement.rewards.map((reward, index) => (
+                      <div key={index} className={styles.rewardPanel}>
+                        <div className={styles.rewardImageContainer}>
+                          <Image
+                            src={getIcon(reward.icon)}
+                            alt={reward.type === 'item' ? 'New Item' : `${reward.type.toUpperCase()} Gained`}
+                            width={45}    // <- Adjust icon width
+                            height={45}   // <- Adjust icon height
+                          />
+                        </div>
+                        <div className={styles.rewardText}>
+                          {reward.type === 'item' ? reward.itemName : `+${reward.amount}`}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.modalFooter}>
+              <div className={`${styles.totalWrapper} ${styles.xpWrapper}`}>
+                <div className={styles.totalCount}>{totalXP}</div>
+                <div className={styles.totalLabel}>
+                  XP Gained - Level {level}
+                </div>
+                <div className={styles.xpBarOuter}>
+                  <div
+                    className={styles.xpBarAlreadyAchieved}
+                    style={{ width: `${progress}%` }}
+                  />
+                  <div
+                    className={styles.xpBarTotal}
+                    style={{ width: `${progress}%` }}
+                  />
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="total-rewards">
-            <div className="xp-gained mb-4">
-              <span className="block text-lg font-semibold">Progress - Level {progress}</span>
-              <div className="progress-bar bg-gray-800 border border-3 border-black rounded-full h-4 mt-2">
-                <div
-                  className="progress bg-green-500 h-4 rounded-full"
-                  style={{ width: `${(xpGained / 170) * 100}%` }}
-                ></div>
+              <div className={`${styles.totalWrapper} ${styles.gemWrapper}`}>
+                <div className={styles.totalCount}>{totalGems}</div>
+                <div className={styles.totalLabel}>Gems Gained</div>
               </div>
-              {/* <p className="text-green-500 font-bold mt-2 flex items-center">
-                <Image src={XPBarIcon} alt="XP Bar Icon" width={24} height={24} className="mr-2" />
-                +{xpGained}
-              </p> */}
+              <div className={styles.buttonContainer}>
+                <button 
+                  className={styles.actionButton}
+                  // onClick={handleLeaderboardClick}
+                >
+                  <Image
+                    src={LeaderboardsIcon}
+                    alt="View Leaderboard"
+                    width={201}
+                    height={60}
+                    draggable={false}
+                  />
+                </button>
+                <button 
+                  className={styles.actionButton}
+                  onClick={handleContinueClick}
+                >
+                  <Image
+                    src={ContinueIcon}
+                    alt="Continue"
+                    width={263}
+                    height={60}
+                    draggable={false}
+                  />
+                </button>
+              </div>
             </div>
-            {/* <div className="gems-gained flex items-center">
-              <Image src={GemsIcon} alt="Gems Icon" width={24} height={24} className="mr-2" />
-              <p className="text-lg font-semibold">Gems Gained</p>
-              <p className="text-green-500 font-bold ml-2">+{gemsGained}</p>
-            </div> */}
           </div>
-        </div>
-        <div className="modal-footer flex justify-between">
-          <button className="btn-leaderboards flex items-center gap-2">
-            <Image src={LeaderboardsIcon} alt="Leaderboards Icon" height={54} className="mr-2 object-contain" />
-          </button>
-          <button className="btn-continue flex items-center gap-2" onClick={handleContinueClick}>
-            <Image src={ContinueIcon} alt="Continue Icon" height={54} className="mr-2 object-contain" />
-          </button>
         </div>
       </div>
     </div>

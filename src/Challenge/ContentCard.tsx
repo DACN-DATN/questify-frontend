@@ -70,17 +70,19 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
               <div className="mb-4">
                 <p className="text-lg font-bold mb-4">{content.questionText}</p>
                 {content.options?.map((option, idx) => (
-                  <div key={idx} className="bg-purple-500 py-1 px-2 rounded-md mb-2">
-                    <label className="block text-white">
-                      <input
-                        type="radio"
-                        name="question"
-                        value={option}
-                        className="mr-2"
-                        onChange={() => handleOptionChange(option)}
-                      />
-                      {option}
-                    </label>
+                  <div key={idx} className="flex justify-center mb-2">
+                    <div className="bg-purple-500 py-1 px-2 w-32 text-center rounded-md">
+                      <label className="block text-white">
+                        <input
+                          type="radio"
+                          name="question"
+                          value={option}
+                          className="mr-2"
+                          onChange={() => handleOptionChange(option)}
+                        />
+                        {option}
+                      </label>
+                    </div>
                   </div>
                 ))}
                 {result !== null && (
@@ -111,13 +113,25 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
       </div>
       {isRewardModalOpen && (
         <RewardModal
-          xpGained={100}
-          gemsGained={50}
           level={2}
-          progress={15}
-          rewards={[
-            { name: 'XP', amount: 100, icon: 'xp' },
-            { name: 'Gems', amount: 50, icon: 'gems' },
+          progress={75}
+          achievements={[
+            {
+              id: 'level-complete',
+              description: 'Level Complete!',
+              rewards: [
+                { type: 'xp', amount: 100, icon: 'xp' },
+                { type: 'gems', amount: 50, icon: 'gems' }
+              ]
+            },
+            {
+              id: 'quiz-bonus',
+              description: 'Bonus!',
+              rewards: [
+                { type: 'xp', amount: 50, icon: 'xp' },
+                { type: 'gems', amount: 25, icon: 'gems' }
+              ]
+            }
           ]}
           onClose={handleCloseRewardModal}
         />

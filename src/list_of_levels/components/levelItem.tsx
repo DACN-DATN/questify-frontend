@@ -143,10 +143,12 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
 
   const handlePlayClick = () => {
     switch (progress) {
-      case 'current':
-        router.push('problems/jump-game');
       case 'passed':
+        router.push('/problems/jump-game');
+        break;
+      case 'current':
         router.push('/challenges');
+        break;
       default:
         return null;
     }
@@ -159,7 +161,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
         return null; // No buttons for 'not passed' levels
       case 'current':
         return (
-          <button className="play-button flex items-center gap-2" onClick={handlePlayClick}>
+          <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
             <Image src={PlayButton1} alt="Play Button" width={150} height={100} />
           </button>
         );
@@ -167,12 +169,12 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
         return (
           <>
             <button
-              className="score-button flex items-center gap-2"
+              className="score-button flex items-center gap-2 hover:scale-105 transition-transform"
               onClick={() => setIsScoreModalOpen(true)}
             >
               <Image src={ScoreButton} alt="Score Button" width={200} height={100} />
             </button>
-            <button className="play-button flex items-center gap-2" onClick={handlePlayClick}>
+            <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
               <Image src={PlayButton2} alt="Play Button" width={200} height={100} />
             </button>
           </>
@@ -188,7 +190,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'passed':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-red-500 border-2 border-yellow-500 flex justify-center items-center"
+            className="w-6 h-6 rounded-full bg-red-500 border-2 border-yellow-500 flex justify-center items-center hover:scale-125 transition-transform"
             title="Passed"
           >
             <Image src={PassedIcon} className="w-6 h-6" alt="Passed Icon" width={24} height={24} />
@@ -197,7 +199,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'current':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-yellow-300 border-2 border-green-700 flex justify-center items-center relative"
+            className="w-6 h-6 rounded-full bg-yellow-300 border-2 border-green-700 flex justify-center items-center relative hover:scale-125 transition-transform"
             title="Current"
           >
             <Image
@@ -215,7 +217,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'not passed':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-gray-300 border-2 border-gray-500 flex justify-center items-center"
+            className="w-6 h-6 rounded-full bg-gray-300 border-2 border-gray-500 flex justify-center items-center hover:scale-125 transition-transform"
             title="Not Passed"
           >
             <Image
