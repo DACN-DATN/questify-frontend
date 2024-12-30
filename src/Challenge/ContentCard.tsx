@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import YouTube from 'react-youtube';
+import RewardModal from '../components/Reward Modal/RewardModal';
 
 interface ContentCardProps {
   type: string;
@@ -19,6 +20,7 @@ interface ContentCardProps {
 const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, totalPages }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [result, setResult] = useState<boolean | null>(null);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
 
   const handleOptionChange = (option: string) => {
     setSelectedAnswer(option);
@@ -26,7 +28,15 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setResult(selectedAnswer === content.answer);
+    const isCorrect = selectedAnswer === content.answer;
+    setResult(isCorrect);
+    if (isCorrect) {
+      setIsRewardModalOpen(true);
+    }
+  };
+
+  const handleCloseRewardModal = () => {
+    setIsRewardModalOpen(false);
   };
 
   return (
@@ -60,17 +70,19 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
               <div className="mb-4">
                 <p className="text-lg font-bold mb-4">{content.questionText}</p>
                 {content.options?.map((option, idx) => (
-                  <div key={idx} className="bg-purple-500 py-1 px-2 rounded-md mb-2">
-                    <label className="block text-white">
-                      <input
-                        type="radio"
-                        name="question"
-                        value={option}
-                        className="mr-2"
-                        onChange={() => handleOptionChange(option)}
-                      />
-                      {option}
-                    </label>
+                  <div key={idx} className="flex justify-center mb-2">
+                    <div className="bg-purple-500 py-1 px-2 w-32 text-center rounded-md">
+                      <label className="block text-white">
+                        <input
+                          type="radio"
+                          name="question"
+                          value={option}
+                          className="mr-2"
+                          onChange={() => handleOptionChange(option)}
+                        />
+                        {option}
+                      </label>
+                    </div>
                   </div>
                 ))}
                 {result !== null && (
@@ -99,6 +111,31 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
           </div>
         )}
       </div>
+      {isRewardModalOpen && (
+        <RewardModal
+          level={2}
+          progress={75}
+          achievements={[
+            {
+              id: 'level-complete',
+              description: 'Level Complete!',
+              rewards: [
+                { type: 'xp', amount: 100, icon: 'xp' },
+                { type: 'gems', amount: 50, icon: 'gems' }
+              ]
+            },
+            {
+              id: 'quiz-bonus',
+              description: 'Bonus!',
+              rewards: [
+                { type: 'xp', amount: 50, icon: 'xp' },
+                { type: 'gems', amount: 25, icon: 'gems' }
+              ]
+            }
+          ]}
+          onClose={handleCloseRewardModal}
+        />
+      )}
     </div>
   );
 };

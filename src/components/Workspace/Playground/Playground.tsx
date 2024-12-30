@@ -5,6 +5,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import EditorFooter from './EditorFooter';
+import RewardModal from '@/components/Reward Modal/RewardModal';
 import { Problem } from '@/utils/types/problem';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
@@ -29,6 +30,7 @@ export interface ISettings {
 const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved }) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
   let [userCode, setUserCode] = useState<string>(problem.starterCode);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
 
   const [fontSize, setFontSize] = useLocalStorage('lcc-fontSize', '16px');
 
@@ -60,12 +62,13 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
       if (typeof handler === 'function') {
         const success = handler(cb);
         if (success) {
-          toast.success('Congrats! All tests passed!', {
-            position: 'top-center',
-            autoClose: 3000,
-            theme: 'dark',
-          });
+          // toast.success('Congrats! All tests passed!', {
+          //   position: 'top-center',
+          //   autoClose: 3000,
+          //   theme: 'dark',
+          // });
           setSuccess(true);
+          setIsRewardModalOpen(true);
           setTimeout(() => {
             setSuccess(false);
           }, 4000);
@@ -111,6 +114,10 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
   const onChange = (value: string) => {
     setUserCode(value);
     localStorage.setItem(`code-${pid}`, JSON.stringify(value));
+  };
+
+  const handleCloseRewardModal = () => {
+    setIsRewardModalOpen(false);
   };
 
   return (
@@ -169,6 +176,31 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
         </div>
       </Split>
       <EditorFooter handleSubmit={handleSubmit} />
+      {isRewardModalOpen && (
+        <RewardModal
+          level={3}
+          progress={50}
+          achievements={[
+            {
+              id: 'level-complete',
+              description: 'Level Complete!',
+              rewards: [
+                { type: 'xp', amount: 150, icon: 'xp' },
+                { type: 'gems', amount: 70, icon: 'gems' }
+              ]
+            },
+            {
+              id: 'quiz-bonus',
+              description: 'Bonus!',
+              rewards: [
+                { type: 'xp', amount: 50, icon: 'xp' },
+                { type: 'gems', amount: 25, icon: 'gems' }
+              ]
+            }
+          ]}
+          onClose={handleCloseRewardModal}
+        />
+      )}
     </div>
   );
 };

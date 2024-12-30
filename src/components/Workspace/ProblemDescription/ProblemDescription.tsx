@@ -16,6 +16,7 @@ import { AiFillLike, AiFillDislike, AiOutlineLoading3Quarters, AiFillStar } from
 import { BsCheck2Circle } from 'react-icons/bs';
 import { TiStarOutline } from 'react-icons/ti';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 type ProblemDescriptionProps = {
   problem: Problem;
@@ -255,7 +256,9 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem, _solve
               {problem.examples.map((example, index) => (
                 <div key={example.id}>
                   <p className="font-medium text-white ">Example {index + 1}: </p>
-                  {example.img && <img src={example.img} alt="" className="mt-3" />}
+                  {example.img && (
+                    <Image src={example.img} alt="" className="mt-3" width={500} height={300} />
+                  )}
                   <div className="example-card">
                     <pre>
                       <strong className="text-white">Input: </strong> {example.inputText}

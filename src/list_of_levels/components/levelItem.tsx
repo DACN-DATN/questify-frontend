@@ -1,6 +1,7 @@
 // src/components/LevelItem.js
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import PlayButton2 from '../images/PlayButton2.svg';
 import PlayButton1 from '../images/PlayButton1.svg';
 import ScoreButton from '../images/ScoreButton.svg';
@@ -9,6 +10,8 @@ import CurrentIcon from '../images/level-banner-unstarted.png';
 import BronzeChestIcon from '../images/bronze-chest.png';
 import LevelModal from './LevelModal';
 import ScoreModal from './ScoreModal';
+import { players } from '../data/playerData';
+
 
 interface LevelItemProps {
   index: number;
@@ -21,43 +24,25 @@ interface LevelItemProps {
 const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, position, progress }) => {
   const [isLevelModalOpen, setIsLevelModalOpen] = useState(false);
   const [isScoreModalOpen, setIsScoreModalOpen] = useState(false);
+  const [test, setTest] = useState(false)
   const [modalContent, setModalContent] = useState<{
     name: string;
     description: string;
     progress: 'passed' | 'current' | 'not passed';
   }>({ name: '', description: '', progress: 'not passed' });
   const [corner, setCorner] = useState('bottom-left');
-  const [players, setPlayers] = useState([
-    { name: 'Player 1', score: 100 },
-    { name: 'Player 2', score: 95 },
-    { name: 'Player 3', score: 90 },
-    { name: 'Player 4', score: 85 },
-    { name: 'Player 5', score: 80 },
-    { name: 'Player 6', score: 75 },
-    { name: 'Player 7', score: 70 },
-    { name: 'Player 8', score: 65 },
-    { name: 'Player 9', score: 60 },
-    { name: 'Player 10', score: 55 },
-    { name: 'Player 11', score: 50 },
-    { name: 'Player 12', score: 45 },
-    { name: 'Player 13', score: 40 },
-    { name: 'Player 14', score: 35 },
-    { name: 'Player 15', score: 30 },
-    { name: 'Player 16', score: 25 },
-    { name: 'Player 17', score: 20 },
-    { name: 'Player 18', score: 15 },
-    { name: 'Player 19', score: 10 },
-    { name: 'Player 20', score: 5 },
-  ]);
-
+  
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelModalRef = useRef<HTMLDivElement>(null);
   const scoreModalRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
-  const handleNodeClick = () => {
+  const handleNodeClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setModalContent({ name, description, progress });
     setCorner(determineCorner(position));
     setIsLevelModalOpen(true);
+    setTest(true);
+    console.log("Clicked on node");
   };
 
   const determineCorner = (nodePosition: { x: number; y: number }) => {
@@ -108,7 +93,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     return { left: 0, top: 0 };
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleScoreModalClickOutside = (event: MouseEvent) => {
     if (scoreModalRef.current && !scoreModalRef.current.contains(event.target as Node)) {
       setIsScoreModalOpen(false); // Close ScoreModal when clicked outside
     }
@@ -120,15 +105,27 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     }
   };
 
+  useEffect(() => {
+    console.log('Modal Content Updated:', modalContent);
+  }, [modalContent]); 
+  
+  useEffect(() => {
+    console.log('isLevelModalOpen Updated:', isLevelModalOpen);
+  }, [isLevelModalOpen]); 
+  
+  useEffect(() => {
+    console.log('Test state Updated:', test);
+  }, [test]); 
+
   // useEffect to close ScoreModal when clicked outside
   useEffect(() => {
     if (isScoreModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mousedown', handleScoreModalClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleScoreModalClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleScoreModalClickOutside);
     };
   }, [isScoreModalOpen]);
 
@@ -144,27 +141,41 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     };
   }, [isLevelModalOpen]);
 
+  const handlePlayClick = () => {
+    switch (progress) {
+      case 'passed':
+        router.push('/problems/jump-game');
+        break;
+      case 'current':
+        router.push('/challenges');
+        break;
+      default:
+        return null;
+    }
+  };
+
+  // render the button for level description based on the progress
   const renderButtons = () => {
     switch (progress) {
       case 'not passed':
         return null; // No buttons for 'not passed' levels
       case 'current':
         return (
-          <button className="play-button flex items-center gap-2">
-            <Image src={PlayButton1} alt="Play Button" width={24} height={24} />
+          <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
+            <Image src={PlayButton1} alt="Play Button" width={150} height={100} />
           </button>
         );
       case 'passed':
         return (
           <>
             <button
-              className="score-button flex items-center gap-2"
+              className="score-button flex items-center gap-2 hover:scale-105 transition-transform"
               onClick={() => setIsScoreModalOpen(true)}
             >
-              <Image src={ScoreButton} alt="Score Button" width={24} height={24} />
+              <Image src={ScoreButton} alt="Score Button" width={200} height={100} />
             </button>
-            <button className="play-button flex items-center gap-2">
-              <Image src={PlayButton2} alt="Play Button" width={24} height={24} />
+            <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
+              <Image src={PlayButton2} alt="Play Button" width={200} height={100} />
             </button>
           </>
         );
@@ -173,12 +184,13 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     }
   };
 
+  // render the level node icon based on the progress
   const getNodeIcon = () => {
     switch (progress) {
       case 'passed':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-red-500 border-2 border-yellow-500 flex justify-center items-center"
+            className="w-6 h-6 rounded-full bg-red-500 border-2 border-yellow-500 flex justify-center items-center hover:scale-125 transition-transform"
             title="Passed"
           >
             <Image src={PassedIcon} className="w-6 h-6" alt="Passed Icon" width={24} height={24} />
@@ -187,7 +199,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'current':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-yellow-300 border-2 border-green-700 flex justify-center items-center relative"
+            className="w-6 h-6 rounded-full bg-yellow-300 border-2 border-green-700 flex justify-center items-center relative hover:scale-125 transition-transform"
             title="Current"
           >
             <Image
@@ -205,7 +217,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
       case 'not passed':
         return (
           <div
-            className="w-6 h-6 rounded-full bg-gray-300 border-2 border-gray-500 flex justify-center items-center"
+            className="w-6 h-6 rounded-full bg-gray-300 border-2 border-gray-500 flex justify-center items-center hover:scale-125 transition-transform"
             title="Not Passed"
           >
             <Image
