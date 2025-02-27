@@ -1,121 +1,121 @@
 .background__container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: url('../assets/images/BackgroundImage.png') no-repeat center center;
-  background-size: cover;
-  overflow: auto;
-  cursor: grab;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	background: url('../assets/images/BackgroundImage.png') no-repeat center center;
+	background-size: cover;
+	overflow: auto;
+	cursor: grab;
 }
 
 .drag__container {
-  position: absolute;
-  width: 3000px;
-  height: 100%;
+	position: absolute;
+	width: 3000px;
+	height: 100%;
 }
 
 .drag__container:active {
-  cursor: grabbing;
+	cursor: grabbing;
 }
 
 .islands__grid {
-  display: flex;
-  gap: 80px;
+	display: flex;
+	gap: 80px;
 }
 
 .island__column {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: space-between;
-  height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	justify-content: space-between;
+	height: 100%;
 }
 
 .island {
-  position: relative;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
-  width: 400px;
+	position: relative;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	transition: transform 0.3s ease;
+	width: 400px;
 }
 
 .locked__island {
-  background-color: black;
+	background-color: black;
 }
 
 .island:hover {
-  transform: scale(1.05);
+	transform: scale(1.05);
 }
 
 .island__image {
-  width: 360px;
+	width: 360px;
 }
 
 .play__button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
 }
 
 .play__button__image {
-  display: block;
-  margin: 0 auto;
+	display: block;
+	margin: 0 auto;
 }
 
 .locked__play__button img {
-  filter: grayscale(100%);
+	filter: grayscale(100%);
 }
 
 .play__button:hover img {
-  opacity: 0.8;
+	opacity: 0.8;
 }
 
 .play__button:active img {
-  opacity: 0.6;
+	opacity: 0.6;
 }
 
 .island__name {
-  font-size: 36px;
-  font-family: 'Bangers', cursive;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: white;
-  margin-top: 3px 0;
-  gap: 0px;
-  box-sizing: border-box;
-  text-shadow:
-    -0.1em -0.1em 0 #000,
-    0.1em -0.1em 0 #000,
-    -0.1em 0.1em 0 #000,
-    0.1em 0.1em 0 #000;
+	font-size: 36px;
+	font-family: 'Bangers', cursive;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	text-align: center;
+	color: white;
+	margin-top: 3px 0;
+	gap: 0px;
+	box-sizing: border-box;
+	text-shadow:
+		-0.1em -0.1em 0 #000,
+		0.1em -0.1em 0 #000,
+		-0.1em 0.1em 0 #000,
+		0.1em 0.1em 0 #000;
 }
 
 .island__progress {
-  font-size: 24px;
-  color: white;
-  height: 50%;
-  font-family: 'Bangers', cursive;
-  font-weight: 400;
-  box-sizing: border-box;
-  text-shadow:
-    -0.1em -0.1em 0 #000,
-    0.1em -0.1em 0 #000,
-    -0.1em 0.1em 0 #000,
-    0.1em 0.1em 0 #000;
-  margin: 3px 0;
+	font-size: 24px;
+	color: white;
+	height: 50%;
+	font-family: 'Bangers', cursive;
+	font-weight: 400;
+	box-sizing: border-box;
+	text-shadow:
+		-0.1em -0.1em 0 #000,
+		0.1em -0.1em 0 #000,
+		-0.1em 0.1em 0 #000,
+		0.1em 0.1em 0 #000;
+	margin: 3px 0;
 }
 
 .background__container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
