@@ -12,7 +12,8 @@
     "build-react": "react-scripts build",
     "test-react": "react-scripts test",
     "eject-react": "react-scripts eject",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format-check": "prettier --check ."
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",

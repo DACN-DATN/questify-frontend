@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from './rewardModal.module.css';
@@ -68,8 +68,8 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
     let totalXP = 0;
     let totalGems = 0;
 
-    achievements.forEach(achievement => {
-      achievement.rewards.forEach(reward => {
+    achievements.forEach((achievement) => {
+      achievement.rewards.forEach((reward) => {
         if (reward.type === 'xp') totalXP += reward.amount || 0;
         if (reward.type === 'gems') totalGems += reward.amount || 0;
       });
@@ -101,18 +101,20 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
             <div className={styles.modalBody}>
               {achievements.map((achievement) => (
                 <div key={achievement.id} className={styles.achievementPanel}>
-                  <div className={styles.achievementDescription}>
-                    {achievement.description}
-                  </div>
+                  <div className={styles.achievementDescription}>{achievement.description}</div>
                   <div className={styles.achievementRewards}>
                     {achievement.rewards.map((reward, index) => (
                       <div key={index} className={styles.rewardPanel}>
                         <div className={styles.rewardImageContainer}>
                           <Image
                             src={getIcon(reward.icon)}
-                            alt={reward.type === 'item' ? 'New Item' : `${reward.type.toUpperCase()} Gained`}
-                            width={45}    // <- Adjust icon width
-                            height={45}   // <- Adjust icon height
+                            alt={
+                              reward.type === 'item'
+                                ? 'New Item'
+                                : `${reward.type.toUpperCase()} Gained`
+                            }
+                            width={45} // <- Adjust icon width
+                            height={45} // <- Adjust icon height
                           />
                         </div>
                         <div className={styles.rewardText}>
@@ -127,18 +129,10 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
             <div className={styles.modalFooter}>
               <div className={`${styles.totalWrapper} ${styles.xpWrapper}`}>
                 <div className={styles.totalCount}>{totalXP}</div>
-                <div className={styles.totalLabel}>
-                  XP Gained - Level {level}
-                </div>
+                <div className={styles.totalLabel}>XP Gained - Level {level}</div>
                 <div className={styles.xpBarOuter}>
-                  <div
-                    className={styles.xpBarAlreadyAchieved}
-                    style={{ width: `${progress}%` }}
-                  />
-                  <div
-                    className={styles.xpBarTotal}
-                    style={{ width: `${progress}%` }}
-                  />
+                  <div className={styles.xpBarAlreadyAchieved} style={{ width: `${progress}%` }} />
+                  <div className={styles.xpBarTotal} style={{ width: `${progress}%` }} />
                 </div>
               </div>
               <div className={`${styles.totalWrapper} ${styles.gemWrapper}`}>
@@ -146,7 +140,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
                 <div className={styles.totalLabel}>Gems Gained</div>
               </div>
               <div className={styles.buttonContainer}>
-                <button 
+                <button
                   className={styles.actionButton}
                   // onClick={handleLeaderboardClick}
                 >
@@ -158,10 +152,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
                     draggable={false}
                   />
                 </button>
-                <button 
-                  className={styles.actionButton}
-                  onClick={handleContinueClick}
-                >
+                <button className={styles.actionButton} onClick={handleContinueClick}>
                   <Image
                     src={ContinueIcon}
                     alt="Continue"

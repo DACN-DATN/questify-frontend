@@ -186,17 +186,17 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
               description: 'Level Complete!',
               rewards: [
                 { type: 'xp', amount: 150, icon: 'xp' },
-                { type: 'gems', amount: 70, icon: 'gems' }
-              ]
+                { type: 'gems', amount: 70, icon: 'gems' },
+              ],
             },
             {
               id: 'quiz-bonus',
               description: 'Bonus!',
               rewards: [
                 { type: 'xp', amount: 50, icon: 'xp' },
-                { type: 'gems', amount: 25, icon: 'gems' }
-              ]
-            }
+                { type: 'gems', amount: 25, icon: 'gems' },
+              ],
+            },
           ]}
           onClose={handleCloseRewardModal}
         />

@@ -12,7 +12,6 @@ import LevelModal from './LevelModal';
 import ScoreModal from './ScoreModal';
 import { players } from '../data/playerData';
 
-
 interface LevelItemProps {
   index: number;
   name: string;
@@ -24,14 +23,14 @@ interface LevelItemProps {
 const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, position, progress }) => {
   const [isLevelModalOpen, setIsLevelModalOpen] = useState(false);
   const [isScoreModalOpen, setIsScoreModalOpen] = useState(false);
-  const [test, setTest] = useState(false)
+  const [test, setTest] = useState(false);
   const [modalContent, setModalContent] = useState<{
     name: string;
     description: string;
     progress: 'passed' | 'current' | 'not passed';
   }>({ name: '', description: '', progress: 'not passed' });
   const [corner, setCorner] = useState('bottom-left');
-  
+
   const nodeRef = useRef<HTMLDivElement>(null);
   const levelModalRef = useRef<HTMLDivElement>(null);
   const scoreModalRef = useRef<HTMLDivElement>(null);
@@ -42,7 +41,7 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
     setCorner(determineCorner(position));
     setIsLevelModalOpen(true);
     setTest(true);
-    console.log("Clicked on node");
+    console.log('Clicked on node');
   };
 
   const determineCorner = (nodePosition: { x: number; y: number }) => {
@@ -107,15 +106,15 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
 
   useEffect(() => {
     console.log('Modal Content Updated:', modalContent);
-  }, [modalContent]); 
-  
+  }, [modalContent]);
+
   useEffect(() => {
     console.log('isLevelModalOpen Updated:', isLevelModalOpen);
-  }, [isLevelModalOpen]); 
-  
+  }, [isLevelModalOpen]);
+
   useEffect(() => {
     console.log('Test state Updated:', test);
-  }, [test]); 
+  }, [test]);
 
   // useEffect to close ScoreModal when clicked outside
   useEffect(() => {
@@ -161,7 +160,10 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
         return null; // No buttons for 'not passed' levels
       case 'current':
         return (
-          <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
+          <button
+            className="play-button flex items-center gap-2 hover:scale-105 transition-transform"
+            onClick={handlePlayClick}
+          >
             <Image src={PlayButton1} alt="Play Button" width={150} height={100} />
           </button>
         );
@@ -174,7 +176,10 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
             >
               <Image src={ScoreButton} alt="Score Button" width={200} height={100} />
             </button>
-            <button className="play-button flex items-center gap-2 hover:scale-105 transition-transform" onClick={handlePlayClick}>
+            <button
+              className="play-button flex items-center gap-2 hover:scale-105 transition-transform"
+              onClick={handlePlayClick}
+            >
               <Image src={PlayButton2} alt="Play Button" width={200} height={100} />
             </button>
           </>

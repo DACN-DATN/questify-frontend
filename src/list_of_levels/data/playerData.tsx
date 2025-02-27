@@ -24,4 +24,4 @@ export const players: PlayerData[] = [
   { name: 'Player 18', score: 15 },
   { name: 'Player 19', score: 10 },
   { name: 'Player 20', score: 5 },
-]
+];

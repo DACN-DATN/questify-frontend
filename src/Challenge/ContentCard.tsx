@@ -121,17 +121,17 @@ const ContentCard: React.FC<ContentCardProps> = ({ type, content, currentPage, t
               description: 'Level Complete!',
               rewards: [
                 { type: 'xp', amount: 100, icon: 'xp' },
-                { type: 'gems', amount: 50, icon: 'gems' }
-              ]
+                { type: 'gems', amount: 50, icon: 'gems' },
+              ],
             },
             {
               id: 'quiz-bonus',
               description: 'Bonus!',
               rewards: [
                 { type: 'xp', amount: 50, icon: 'xp' },
-                { type: 'gems', amount: 25, icon: 'gems' }
-              ]
-            }
+                { type: 'gems', amount: 25, icon: 'gems' },
+              ],
+            },
           ]}
           onClose={handleCloseRewardModal}
         />
