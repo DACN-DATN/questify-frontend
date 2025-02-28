@@ -1,5 +1,5 @@
 import React from 'react';
-import Levels from '../list_of_levels/Levels';
+import Levels from '../levels/Levels';
 
 const LevelsRoute = () => {
   return <Levels />;

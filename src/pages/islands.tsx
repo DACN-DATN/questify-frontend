@@ -1,5 +1,5 @@
 import React from 'react';
-import IslandsPage from '@/Islands/IslandsPage';
+import IslandsPage from '@/islands/IslandsPage';
 
 const IslandsRoute: React.FC = () => {
   return <IslandsPage />;

@@ -15,6 +15,7 @@ const Island: React.FC<IslandProps> = ({ svg, name, progress, status }) => {
   const router = useRouter();
 
   const handlePlayButtonClick = () => {
+    console.log('Play button clicked');
     router.push('/levels');
   };
 
