@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Logo from '../Logo';
 import Button from '../Button';
-import InputField from '../InputField';
+import InputField from '@/components/InputField/InputField';
 import PasswordInput from '../PasswordInput';
 import LoginImage from '@/assets/images/login_image.png';
 

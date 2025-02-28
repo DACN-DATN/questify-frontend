@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import InputField from '../InputField';
+import InputField from '@/components/InputField/InputField';
 import Logo from '../Logo';
 import PasswordInput from '../PasswordInput';
 import Button from '../Button';
