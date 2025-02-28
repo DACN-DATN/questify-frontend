@@ -210,11 +210,11 @@ const LevelItem: React.FC<LevelItemProps> = ({ index, name, description, positio
             <Image
               src={CurrentIcon}
               alt="Current"
-              className="absolute w-12 h-15" // Adjust size of the flag
+              className="absolute w-12 h-15"
               width={48}
               height={60}
               style={{
-                bottom: 8, // Align the root of the flag (the bottom) to the center of the circle
+                bottom: 8, 
               }}
             />
           </div>

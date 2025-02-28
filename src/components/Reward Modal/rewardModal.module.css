@@ -21,12 +21,12 @@
 }
 
 .backgroundWrapper {
-  width: 745px; /* <- Adjust overall width here */
+  width: 745px; 
   background: rgba(0, 0, 0, 0);
   border: 0px solid rgba(0, 0, 0, 0);
   border-style: solid;
-  border-image: url('./images/victory_modal_border_background.png') 250 0 100 0 fill round; /* <- Controls how the border image is sliced */
-  border-width: 250px 0 100px 0; /* <- Adjust top/bottom border sizes here: [top] [right] [bottom] [left] */
+  border-image: url('./images/victory_modal_border_background.png') 250 0 100 0 fill round; 
+  border-width: 250px 0 100px 0;
   border-radius: 12px;
   animation: dropDown 0.5s ease-out forwards;
 }
@@ -192,14 +192,14 @@
   top: 0;
   display: flex;
   justify-content: center;
-  gap: 0px; /* <- Adjust space between reward panels */
+  gap: 0px;
 }
 
 .rewardPanel {
   background: url('./images/reward_plate_wide.png') no-repeat center;
-  background-size: contain; /* <- Makes sure the entire background image is visible */
-  width: 150px; /* <- Adjust panel width */
-  height: 90px; /* <- Adjust panel height */
+  background-size: contain;
+  width: 150px; 
+  height: 90px;
   position: relative;
   z-index: 1;
   transition: 0.25s ease;
@@ -213,17 +213,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 64px; /* <- Adjust icon container height */
-  margin-top: 6px; /* <- Adjust icon vertical position */
-  width: 64px; /* <- Adjust icon container width */
+  height: 64px; 
+  margin-top: 6px;
+  width: 64px; 
 }
 
 .rewardText {
   text-align: center;
   color: white;
   font-weight: bold;
-  margin-top: -4px; /* <- Adjust space between icon and text */
-  font-size: 14px; /* <- Adjust text size */
+  margin-top: -4px;
+  font-size: 14px;
 }
 
 .totalWrapper {
