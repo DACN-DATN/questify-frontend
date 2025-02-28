@@ -85,19 +85,6 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
       <div className={styles.modalDialog}>
         <div ref={modalRef} className={styles.backgroundWrapper}>
           <div className={styles.modalContent}>
-            {/* <div className={styles.modalHeader}>
-              <div className={styles.victoryHeader}>
-                <div className={styles.victoryTitle}>
-                  <Image
-                    src={VictoryWord}
-                    alt="Victory"
-                    draggable={false}
-                    width={378}
-                    height={60}
-                  />
-                </div>
-              </div>
-            </div> */}
             <div className={styles.modalBody}>
               {achievements.map((achievement) => (
                 <div key={achievement.id} className={styles.achievementPanel}>
@@ -113,8 +100,8 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
                                 ? 'New Item'
                                 : `${reward.type.toUpperCase()} Gained`
                             }
-                            width={45} // <- Adjust icon width
-                            height={45} // <- Adjust icon height
+                            width={45} 
+                            height={45} 
                           />
                         </div>
                         <div className={styles.rewardText}>
@@ -142,7 +129,6 @@ const RewardModal: React.FC<RewardModalProps> = ({ level, progress, achievements
               <div className={styles.buttonContainer}>
                 <button
                   className={styles.actionButton}
-                  // onClick={handleLeaderboardClick}
                 >
                   <Image
                     src={LeaderboardsIcon}

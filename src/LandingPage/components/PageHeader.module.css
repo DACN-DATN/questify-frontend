@@ -1,0 +1,143 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 548px;
+  position: relative;
+  background: #F0F2F5;
+  overflow: hidden;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+.contentWrapper {
+  position: relative;
+  left: 0;
+  top: 0;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 40px;
+  z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .contentWrapper {
+    padding-left: 14%;
+    padding-right: 0;
+  }
+}
+
+.heading {
+  /* max-width: 648px; */
+  width: 100%;
+  color: #1D2026;
+  font-size: clamp(32px, 5vw, 48px);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  line-height: 1.8;
+  word-wrap: break-word;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.description {
+  max-width: 648px;
+  width: 100%;
+  color: #4E5566;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.ctaButton {
+  padding: 0 32px;
+  background: #00ADB5;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ctaButton:hover {
+  background: #198b91;
+}
+
+.buttonText {
+  color: white;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 56px;
+  word-wrap: break-word;
+}
+
+.imageWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: visible;
+}
+
+@media (min-width: 1600px) {
+  .imageWrapper {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .imageWrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-height: 450px;
+  }
+  
+  .contentWrapper {
+    gap: 20px;
+    padding-top: 25px;
+  }
+  
+  .imageWrapper {
+    width: 60%;
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    min-height: 400px;
+  }
+  
+  .contentWrapper {
+    width: 90%;
+    margin: 0 auto;
+    padding: 25px 0 0;
+    gap: 15px;
+  }
+  
+  .heading {
+    line-height: 1.5;
+  }
+  
+  .imageWrapper {
+    width: 80%;
+    opacity: 0.4;
+  }
+}

@@ -24,7 +24,7 @@ const Levels: React.FC = () => {
       });
     };
 
-    handleResize(); // Set initial dimensions
+    handleResize(); 
     window.addEventListener('resize', handleResize);
 
     return () => {
