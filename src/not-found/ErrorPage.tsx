@@ -1,16 +1,7 @@
 import React from 'react';
 import styles from './ErrorPage.module.css';
 import Header from '../components/Header/Header';
-
-interface SupportLinkProps {
-  text: string;
-}
-
-const SupportLink: React.FC<SupportLinkProps> = ({ text }) => (
-  <a href="#" className={styles.supportLink}>
-    {text}
-  </a>
-);
+import Footer from '@/components/Footer/Footer';
 
 const ErrorPage: React.FC = () => {
   const supportLinks = ['FAQs', 'Privacy Policy', 'Terms & Condition'];
@@ -39,14 +30,7 @@ const ErrorPage: React.FC = () => {
           />
         </div>
       </div>
-      <div className={styles.supportLinks}>
-        {supportLinks.map((link, index) => (
-          <SupportLink key={index} text={link} />
-        ))}
-      </div>
-      <p className={styles.footerText}>
-        © 2024 - Questify. Designed by Templatecookie. All rights reserved
-      </p>
+      <Footer />
     </div>
   );
 };
